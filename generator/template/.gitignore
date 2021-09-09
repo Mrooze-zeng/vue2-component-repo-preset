@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/z-ui
+/<%= projectName %>
 /package
 packages/index.js
 /packages/*-*/index.js

@@ -47,10 +47,11 @@ export default {install,${components}};`;
     });
     return output;
   }
-  formatCode(code = "") {
+  formatCode(code = "", config = {}) {
     return prettier.format(code, {
       ...prettierOptions,
       ...this.options.prettierOptions,
+      ...config,
     });
   }
   async readDir() {
@@ -94,9 +95,10 @@ export default {install,${components}};`;
     );
   }
   apply(compiler) {
-    compiler.hooks.environment.tap(this.constructor.name, async (...params) => {
-      await this.readDir();
-      await this.createFiles();
-    });
+    compiler.hooks.environment.tap(this.constructor.name, this.run.bind(this));
+  }
+  async run() {
+    await this.readDir();
+    await this.createFiles();
   }
 };
