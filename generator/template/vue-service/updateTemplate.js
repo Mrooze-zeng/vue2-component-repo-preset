@@ -5,6 +5,7 @@ const presetDir = "vue-cli-presets/vue2-component-repo-preset.git/generator";
 const path = require("path");
 const os = require("os");
 const fs = require("fs");
+const ejs = require("ejs");
 const { warn } = require("@vue/cli-shared-utils/lib/logger");
 
 const tplDir = path.resolve(os.tmpdir(), presetDir);
@@ -22,7 +23,7 @@ const replaceFile = function (tpls = {}, target = "") {
     const buf = fs.readFileSync(path.resolve(target, tpls[file]));
     fs.writeFileSync(
       path.resolve(__dirname, "../", file),
-      buf.toString().replace("<%= projectName %>", projectName),
+      ejs.render(buf.toString(), { projectName: projectName }),
     );
 
     warn(`替换 ${file}`);
