@@ -66,7 +66,7 @@ module.exports = {
       replaceFile(tpls, tplDir);
     } else {
       let presetDir;
-      const { plugins } = await loadRemotePreset(remotePreset);
+      const { plugins } = await loadRemotePreset(remotePreset, true);
       for (const plugin in plugins) {
         if (
           plugin.includes("vue-cli-presets/vue2-component-repo-preset.git") &&
