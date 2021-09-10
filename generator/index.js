@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = async function (api, optons, rootOptions) {
+  console.log(api, optons, rootOptions);
   api.extendPackage({
     scripts: {
       serve:
@@ -12,6 +13,7 @@ module.exports = async function (api, optons, rootOptions) {
       lint: "vue-cli-service lint",
       "build:package": "webpack --config build/webpack.config.build.js",
       "create:package": "vue-cli-service createPackage",
+      "update:tpl": "vue-cli-service updateTpl",
     },
     devDependencies: {
       "@babel/core": "^7.15.5",
@@ -23,6 +25,7 @@ module.exports = async function (api, optons, rootOptions) {
       "webpack-cli": "^4.8.0",
       "clean-webpack-plugin": "^4.0.0",
       "babel-loader": "^8.2.2",
+      "@vue/cli": "^4.5.13",
     },
     vuePlugins: {
       service: ["./vue-service/index"],
@@ -46,5 +49,5 @@ module.exports = async function (api, optons, rootOptions) {
     }
   });
 
-  api.render(source, rootOptions);
+  api.render(source, { ...rootOptions, tpls: source });
 };
