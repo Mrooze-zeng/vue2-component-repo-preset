@@ -1,1 +1,60 @@
-(()=>{var e,r={9971:(e,r,t)=>{const s=t(1017);e.exports=async function(e,r,i){e.extendPackage({scripts:{serve:"npm run build:package && cross-env RUN_TYPE=dev vue-cli-service serve","serve:prod":"npm run build:package && cross-env RUN_TYPE=prod  vue-cli-service serve",build:"npm run build:package && cross-env RUN_TYPE=prod vue-cli-service build",lint:"vue-cli-service lint","build:package":"webpack --config build/webpack.config.build.js","create:package":"vue-cli-service createPackage","update:tpl":"vue-cli-service updateTpl"},devDependencies:{"@babel/core":"^7.15.5","@babel/types":"^7.15.4","cross-env":"^7.0.3","loader-utils":"^2.0.0",prettier:"^2.3.2","schema-utils":"^3.1.1","webpack-cli":"^4.8.0","clean-webpack-plugin":"^4.0.0","babel-loader":"^8.2.2","@vue/cli":"^4.5.13",ejs:"^3.1.6"},vuePlugins:{service:["./vue-service/index"]}});const o=await t.e(393).then(t.bind(t,3393)),c=s.resolve(__dirname,"./template");let u=await o.globby(["**/*"],{cwd:c,dot:!0}),a={};u.forEach((e=>{!r.addGithubActions&&e.includes(".github/workflows/deploy.yml")||r.ignoreSrc&&e.startsWith("src")||(a[e]=`template/${e}`)})),e.render(a,{...i,tpls:a,tplDir:s.resolve(e.id,"generator")})}},2361:e=>{"use strict";e.exports=require("events")},7147:e=>{"use strict";e.exports=require("fs")},7561:e=>{"use strict";e.exports=require("node:fs")},9411:e=>{"use strict";e.exports=require("node:path")},4492:e=>{"use strict";e.exports=require("node:stream")},7261:e=>{"use strict";e.exports=require("node:util")},2037:e=>{"use strict";e.exports=require("os")},1017:e=>{"use strict";e.exports=require("path")},2781:e=>{"use strict";e.exports=require("stream")},3837:e=>{"use strict";e.exports=require("util")}},t={};function s(e){var i=t[e];if(void 0!==i)return i.exports;var o=t[e]={exports:{}};return r[e](o,o.exports,s),o.exports}s.m=r,s.d=(e,r)=>{for(var t in r)s.o(r,t)&&!s.o(e,t)&&Object.defineProperty(e,t,{enumerable:!0,get:r[t]})},s.f={},s.e=e=>Promise.all(Object.keys(s.f).reduce(((r,t)=>(s.f[t](e,r),r)),[])),s.u=e=>e+".js",s.o=(e,r)=>Object.prototype.hasOwnProperty.call(e,r),s.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},e={826:1},s.f.require=(r,t)=>{e[r]||(r=>{var t=r.modules,i=r.ids,o=r.runtime;for(var c in t)s.o(t,c)&&(s.m[c]=t[c]);o&&o(s);for(var u=0;u<i.length;u++)e[i[u]]=1})(require("./"+s.u(r)))},s(9971)})();
+const path = require("path");
+
+module.exports = async function (api, optons, rootOptions) {
+  api.extendPackage({
+    scripts: {
+      serve:
+        "npm run build:package && cross-env RUN_TYPE=dev vue-cli-service serve",
+      "serve:prod":
+        "npm run build:package && cross-env RUN_TYPE=prod  vue-cli-service serve",
+      build:
+        "npm run build:package && cross-env RUN_TYPE=prod vue-cli-service build",
+      lint: "vue-cli-service lint",
+      "build:package": "webpack --config build/webpack.config.build.js",
+      "create:package": "vue-cli-service createPackage",
+      "update:tpl": "vue-cli-service updateTpl",
+    },
+    devDependencies: {
+      "@babel/core": "^7.15.5",
+      "@babel/types": "^7.15.4",
+      "cross-env": "^7.0.3",
+      "loader-utils": "^2.0.0",
+      prettier: "^2.3.2",
+      "schema-utils": "^3.1.1",
+      "webpack-cli": "^4.8.0",
+      "clean-webpack-plugin": "^4.0.0",
+      "babel-loader": "^8.2.2",
+      "@vue/cli": "^4.5.13",
+      ejs: "^3.1.6",
+    },
+    vuePlugins: {
+      service: ["./vue-service/index"],
+    },
+  });
+
+  const globby = await import("globby");
+  const baseDir = path.resolve(__dirname, "./template");
+
+  let _files = await globby.globby(["**/*"], {
+    cwd: baseDir,
+    dot: true,
+  });
+  let source = {};
+
+  _files.forEach((f) => {
+    if (
+      !(
+        (!optons.addGithubActions &&
+          f.includes(".github/workflows/deploy.yml")) ||
+        (optons.ignoreSrc && f.startsWith("src"))
+      )
+    ) {
+      source[f] = `template/${f}`;
+    }
+  });
+  api.render(source, {
+    ...rootOptions,
+    tpls: source,
+    tplDir: path.resolve(api.id, "generator"),
+  });
+};
