@@ -1,6 +1,4 @@
-// @ts-ignore
-// prettier-ignore
-const projectName ="<%= projectName %>";
+const projectName = "<%= projectName %>";
 
 const presetDir = "vue-cli-presets/vue2-component-repo-preset.git/generator";
 
