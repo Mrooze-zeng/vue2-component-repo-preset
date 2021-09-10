@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = async function (api, optons, rootOptions) {
-  console.log(api, optons, rootOptions);
+  console.log(api.id);
   api.extendPackage({
     scripts: {
       serve:
@@ -49,5 +49,9 @@ module.exports = async function (api, optons, rootOptions) {
     }
   });
 
-  api.render(source, { ...rootOptions, tpls: source });
+  api.render(source, {
+    ...rootOptions,
+    tpls: source,
+    tplDir: path.resolve(api.id, "generator"),
+  });
 };
