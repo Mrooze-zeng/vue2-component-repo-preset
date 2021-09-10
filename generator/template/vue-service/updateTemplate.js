@@ -1,11 +1,18 @@
 // @ts-ignore
 // prettier-ignore
 const tpls = <%- JSON.stringify(tpls)%>;
-const tplDir = "<%= tplDir %>";
+
+
+const presetDir = "vue-cli-presets/vue2-component-repo-preset.git/generator";
 
 const path = require("path");
+const os = require("os")
 const fs = require("fs");
 const ejs = require("ejs");
+const { warn } = require("@vue/cli-shared-utils/lib/logger");
+
+const tplDir = path.resolve(os.tmpdir(),presetDir)
+
 
 const remotePreset =
   "direct:https://github.com/Mrooze-zeng/vue2-component-repo-preset.git";
@@ -20,9 +27,10 @@ const replaceFile = function (tpls = {}, currentFile = "", target = "") {
     } else {
       fs.writeFileSync(
         path.resolve(__dirname, "../", file),
-        ejs.render(buf.toString(), { tpls, tplDir }),
+        ejs.render(buf.toString(), { tpls }),
       );
     }
+    warn(`替换${file}`)
   }
 };
 
