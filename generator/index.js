@@ -53,7 +53,7 @@ module.exports = async function (api, optons, rootOptions) {
   });
   api.render(source, {
     ...rootOptions,
-    // tpls: source,
-    // tplDir: path.resolve(api.id, "generator"),
+    tpls: source,
+    tplDir: path.resolve(api.id, "generator"),
   });
 };
