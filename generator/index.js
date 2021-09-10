@@ -1,5 +1,25 @@
 const path = require("path");
 
+const getTpls = async function (optons) {
+  const globby = await import("globby");
+  const baseDir = path.resolve(__dirname, "./template");
+
+  let _files = await globby.globby(["**/*"], {
+    cwd: baseDir,
+    dot: true,
+  });
+  let source = {};
+
+  _files.forEach((f) => {
+    if (
+      !(!optons.addGithubActions && f.includes(".github/workflows/deploy.yml"))
+    ) {
+      source[f] = `template/${f}`;
+    }
+  });
+  return source;
+};
+
 module.exports = async function (api, optons, rootOptions) {
   api.extendPackage({
     scripts: {
@@ -31,27 +51,7 @@ module.exports = async function (api, optons, rootOptions) {
       service: ["./vue-service/index"],
     },
   });
-
-  const globby = await import("globby");
-  const baseDir = path.resolve(__dirname, "./template");
-
-  let _files = await globby.globby(["**/*"], {
-    cwd: baseDir,
-    dot: true,
-  });
-  let source = {};
-
-  _files.forEach((f) => {
-    if (
-      !(
-        (!optons.addGithubActions &&
-          f.includes(".github/workflows/deploy.yml")) ||
-        (optons.ignoreSrc && f.startsWith("src"))
-      )
-    ) {
-      source[f] = `template/${f}`;
-    }
-  });
+  const source = await getTpls(optons);
   api.render(source, {
     ...rootOptions,
     tpls: source,
