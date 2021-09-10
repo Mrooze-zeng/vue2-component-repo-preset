@@ -54,7 +54,7 @@ module.exports = async function (api, optons, rootOptions) {
   const source = await getTpls(optons);
   api.render(source, {
     ...rootOptions,
-    tpls: source,
-    tplDir: path.resolve(api.id, "generator"),
+    // tpls: source,
+    // tplDir: path.resolve(api.id, "generator"),
   });
 };
