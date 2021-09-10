@@ -18,7 +18,7 @@ module.exports = {
   action: async function () {
     const cwd = path.resolve(__dirname, "../../");
     const targetDir = path.resolve(cwd, projectName);
-    const creator = Creator(projectName, targetDir, []);
+    const creator = new Creator(projectName, targetDir, []);
     await creator.create({
       cwd: cwd,
       preset: remotePreset,
