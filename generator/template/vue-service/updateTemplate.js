@@ -19,7 +19,7 @@ const loadRemotePreset = require("@vue/cli/lib/util/loadRemotePreset");
 
 const replaceFile = function (tpls = {}, target = "") {
   for (const file in tpls) {
-    if (file.startsWith(".")) {
+    if (file.startsWith(".") && !file.startsWith(".github")) {
       continue;
     }
     const buf = fs.readFileSync(path.resolve(target, tpls[file]));
@@ -64,20 +64,16 @@ module.exports = {
   },
   action: async function () {
     const tpls = await getTpls();
-    if (fs.lstatSync(tplDir)) {
-      replaceFile(tpls, tplDir);
-    } else {
-      let presetDir;
-      const { plugins } = await loadRemotePreset(remotePreset, true);
-      for (const plugin in plugins) {
-        if (
-          plugin.includes("vue-cli-presets/vue2-component-repo-preset.git") &&
-          plugins[plugin]._isPreset
-        ) {
-          presetDir = path.resolve(plugin, "generator");
-        }
+    let presetDir;
+    const { plugins } = await loadRemotePreset(remotePreset, true);
+    for (const plugin in plugins) {
+      if (
+        plugin.includes("vue-cli-presets/vue2-component-repo-preset.git") &&
+        plugins[plugin]._isPreset
+      ) {
+        presetDir = path.resolve(plugin, "generator");
       }
-      replaceFile(tpls, presetDir);
     }
+    replaceFile(tpls, presetDir);
   },
 };
