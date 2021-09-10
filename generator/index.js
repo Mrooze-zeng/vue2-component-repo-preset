@@ -33,6 +33,7 @@ module.exports = async function (api, optons, rootOptions) {
       "build:package": "webpack --config build/webpack.config.build.js",
       "create:package": "vue-cli-service createPackage",
       "update:tpl": "vue-cli-service updateTpl",
+      "fetch:package": "vue-cli-service fetchPackage",
     },
     devDependencies: {
       "@babel/core": "^7.15.5",
@@ -47,6 +48,7 @@ module.exports = async function (api, optons, rootOptions) {
       "@vue/cli": "^4.5.13",
       ejs: "^3.1.6",
       globby: "^12.0.2",
+      "download-git-repo": "^3.0.2",
     },
     vuePlugins: {
       service: ["./vue-service/index"],
