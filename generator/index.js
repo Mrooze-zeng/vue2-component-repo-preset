@@ -1,7 +1,6 @@
 const path = require("path");
 
 module.exports = async function (api, optons, rootOptions) {
-  console.log(api.id);
   api.extendPackage({
     scripts: {
       serve:
