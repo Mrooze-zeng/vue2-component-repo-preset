@@ -40,9 +40,7 @@ const getTpls = async function (optons) {
   });
   let source = {};
 
-  let isExist = fs.lstatSync(
-    path.resolve(__dirname, "../.github/workflows/deploy.yml"),
-  );
+  let isExist = fs.existsSync(path.resolve(__dirname, "../.github"));
 
   if (!isExist) {
     _files = _files.filter((f) => f != ".github/workflows/deploy.yml");
