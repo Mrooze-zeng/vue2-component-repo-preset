@@ -34,6 +34,10 @@ module.exports = {
   },
   action: async function () {
     const isExist = fs.lstatSync(tplDir);
+    const currentFile = path.join(
+      path.basename(__dirname),
+      path.basename(__filename),
+    );
     if (isExist) {
       replaceFile(tpls, currentFile, tplDir);
     } else {
