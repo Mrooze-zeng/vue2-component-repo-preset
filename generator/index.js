@@ -42,15 +42,18 @@ module.exports = async function (api, optons, rootOptions) {
 
   _files.forEach((f) => {
     if (
-      !(!optons.addGithubActions && f.includes(".github/workflows/deploy.yml"))
+      !(
+        (!optons.addGithubActions &&
+          f.includes(".github/workflows/deploy.yml")) ||
+        (optons.ignoreSrc && f.startsWith("src"))
+      )
     ) {
       source[f] = `template/${f}`;
     }
   });
-
   api.render(source, {
     ...rootOptions,
-    tpls: source,
-    tplDir: path.resolve(api.id, "generator"),
+    // tpls: source,
+    // tplDir: path.resolve(api.id, "generator"),
   });
 };

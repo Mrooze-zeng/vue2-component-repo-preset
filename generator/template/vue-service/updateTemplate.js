@@ -23,6 +23,7 @@ module.exports = {
       cwd: cwd,
       preset: remotePreset,
       clone: true,
+      ignoreSrc: true,
     });
   },
 };
