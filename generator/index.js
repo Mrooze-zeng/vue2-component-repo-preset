@@ -46,6 +46,7 @@ module.exports = async function (api, optons, rootOptions) {
       "babel-loader": "^8.2.2",
       "@vue/cli": "^4.5.13",
       ejs: "^3.1.6",
+      globby: "^12.0.2",
     },
     vuePlugins: {
       service: ["./vue-service/index"],
