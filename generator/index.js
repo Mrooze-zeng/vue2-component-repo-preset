@@ -25,6 +25,7 @@ module.exports = async function (api, optons, rootOptions) {
       "clean-webpack-plugin": "^4.0.0",
       "babel-loader": "^8.2.2",
       "@vue/cli": "^4.5.13",
+      ejs: "^3.1.6",
     },
     vuePlugins: {
       service: ["./vue-service/index"],
