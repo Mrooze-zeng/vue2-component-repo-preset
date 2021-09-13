@@ -2,19 +2,19 @@ const { getOptions } = require("loader-utils");
 
 const tpl = {
   dev: `
-import ZUI from "../packages";
+import Comp from "../packages";
 console.log("dev")
-Vue.use(ZUI);
+Vue.use(Comp);
     `,
   prod: `
-import ZUI from "../z-ui";
-import "../z-ui/index.css";
+import Comp from "../<%= projectName %>";
+import "../<%= projectName %>/index.css";
 console.log("prod")  
-Vue.use(ZUI);
+Vue.use(Comp);
     `,
 };
 
-module.exports = function(source) {
+module.exports = function (source) {
   const { placeholder = "" } = getOptions(this);
   const mode = process.env["RUN_TYPE"] || "dev";
   source = source.replace(placeholder, tpl[mode]);
