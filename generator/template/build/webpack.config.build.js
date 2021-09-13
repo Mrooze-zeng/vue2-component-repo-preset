@@ -64,6 +64,9 @@ module.exports = {
       },
     ],
   },
+  externals: {
+    _: "underscore",
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new DisableEslintCheckPlugin(),

@@ -8,7 +8,6 @@ Vue.use(Comp);
     `,
   prod: `
 import Comp from "../<%= projectName %>";
-import "../<%= projectName %>/index.css";
 console.log("prod")  
 Vue.use(Comp);
     `,
