@@ -15,6 +15,7 @@ module.exports = {
     version: true,
     timings: true,
     builtAt: true,
+    errors: true,
   },
   entry: {
     index: "./packages/index.js",
