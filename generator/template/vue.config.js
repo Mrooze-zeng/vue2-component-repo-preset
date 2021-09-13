@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   chainWebpack: (config) => {
@@ -13,6 +14,10 @@ module.exports = {
       .end();
   },
   configureWebpack: {
-    plugins: [],
+    plugins: [
+      new webpack.ProvidePlugin({
+        _: "underscore",
+      }),
+    ],
   },
 };

@@ -43,7 +43,7 @@ module.exports = {
           },
           mangle: {
             toplevel: true,
-            properties: true,
+            // properties: true,
           },
         },
       }),

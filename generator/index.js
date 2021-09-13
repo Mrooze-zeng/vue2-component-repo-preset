@@ -23,7 +23,8 @@ const getTpls = async function (optons) {
 module.exports = async function (api, optons, rootOptions) {
   api.extendPackage({
     scripts: {
-      serve: "cross-env RUN_TYPE=dev vue-cli-service serve",
+      serve:
+        "npm run build:package && cross-env RUN_TYPE=dev vue-cli-service serve",
       "serve:prod":
         "npm run build:package && cross-env RUN_TYPE=prod  vue-cli-service serve",
       build:
