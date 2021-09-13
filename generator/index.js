@@ -50,6 +50,7 @@ module.exports = async function (api, optons, rootOptions) {
       "download-git-repo": "^3.0.2",
       "sass-loader": "^10.0.3",
       "node-sass": "^6.0.1",
+      "terser-webpack-plugin": "^4.2.3",
     },
     vuePlugins: {
       service: ["./vue-service/index"],

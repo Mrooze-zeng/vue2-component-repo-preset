@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const DisableEslintCheckPlugin = require("./disable-eslint-check-plugin");
 const CreatePackagesExportsPlugin = require("./create-packages-exports-plugin");
 const VueUsePackagesPlugin = require("./vue-use-packages-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -29,6 +30,24 @@ module.exports = {
   },
   optimization: {
     minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        minify: TerserPlugin.esbuildMinify,
+        terserOptions: {
+          compress: {
+            passes: 2,
+            toplevel: true,
+            drop_console: true,
+            booleans_as_integers: true,
+            arguments: true,
+          },
+          mangle: {
+            toplevel: true,
+            properties: true,
+          },
+        },
+      }),
+    ],
     //   splitChunks: {
     //     cacheGroups: {
     //       commons: {
