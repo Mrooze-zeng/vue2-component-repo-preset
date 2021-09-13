@@ -7,6 +7,7 @@ const os = require("os");
 const fs = require("fs");
 const ejs = require("ejs");
 const { warn } = require("@vue/cli-shared-utils/lib/logger");
+const crypto = require("crypto");
 
 const tplDir = path.resolve(os.tmpdir(), presetDir);
 
@@ -15,18 +16,34 @@ const remotePreset =
 
 const loadRemotePreset = require("@vue/cli/lib/util/loadRemotePreset");
 
-const replaceFile = function (tpls = {}, target = "") {
+const calculateMd5 = function (buffer = "") {
+  const hash = crypto.createHash("md5");
+  hash.update(buffer, "utf-8");
+  return hash.digest("hex");
+};
+
+const replaceFile = function (tpls = {}, source = "") {
   for (const file in tpls) {
     if (file.startsWith(".") && !file.startsWith(".github")) {
       continue;
     }
-    const buf = fs.readFileSync(path.resolve(target, tpls[file]));
-    fs.writeFileSync(
-      path.resolve(__dirname, "../", file),
-      ejs.render(buf.toString(), { projectName: projectName }),
-    );
+    const target = path.resolve(__dirname, "../", file);
+    const sourceBuf = fs.readFileSync(path.resolve(source, tpls[file]));
+    let sourceMd5 = calculateMd5(sourceBuf);
+    let targetMd5 = "";
 
-    warn(`替换 ${file}`);
+    if (fs.existsSync(target)) {
+      targetMd5 = calculateMd5(fs.readFileSync(target));
+    }
+
+    if (sourceMd5 != targetMd5) {
+      fs.writeFileSync(
+        target,
+        ejs.render(sourceBuf.toString(), { projectName: projectName }),
+      );
+
+      warn(`替换 ${file}`);
+    }
   }
 };
 

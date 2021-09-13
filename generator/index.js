@@ -49,6 +49,8 @@ module.exports = async function (api, optons, rootOptions) {
       ejs: "^3.1.6",
       globby: "^12.0.2",
       "download-git-repo": "^3.0.2",
+      "sass-loader": "^10.0.3",
+      "node-sass": "^6.0.1",
     },
     vuePlugins: {
       service: ["./vue-service/index"],
