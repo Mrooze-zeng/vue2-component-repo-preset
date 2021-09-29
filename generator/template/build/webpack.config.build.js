@@ -2,9 +2,9 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const DisableEslintCheckPlugin = require("./disable-eslint-check-plugin");
-const CreatePackagesExportsPlugin = require("./create-packages-exports-plugin");
-const VueUsePackagesPlugin = require("./vue-use-packages-plugin");
+const DisableEslintCheckPlugin = require("@z-toolkit/v1/webpack/disable-eslint-check-plugin");
+const CreatePackagesExportsPlugin = require("@z-toolkit/v1/webpack/create-packages-exports-plugin");
+const VueUsePackagesPlugin = require("@z-toolkit/v1/webpack/vue-use-packages-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
@@ -22,9 +22,9 @@ module.exports = {
     index: "./packages/index.js",
   },
   output: {
-    path: path.resolve(process.cwd(), "/<%= projectName %>"),
-    publicPath: "/<%= projectName %>/",
-    library: "<%= projectName %>",
+    path: path.resolve(process.cwd(), "cn-ui"),
+    publicPath: "/cn-ui/",
+    library: "cn-ui",
     libraryTarget: "umd",
     umdNamedDefine: true,
   },
