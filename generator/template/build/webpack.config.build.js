@@ -1,5 +1,5 @@
 /**
- * 此文件可能通过运行yarn reset:tpl 重置为初始配置
+ * 此文件可能通过运行yarn reset:config 重置为初始配置
  */
 
 const path = require("path");
