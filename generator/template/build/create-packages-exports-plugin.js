@@ -2,16 +2,22 @@ const fs = require("fs");
 const path = require("path");
 const prettier = require("prettier");
 const prettierOptions = require("./prettier-default-options.json");
+const pkg = require("../package.json");
 
 module.exports = class CreatePackagesExportsPlugin {
-  constructor(
-    options = {
-      targetFolder: path.join(__dirname, "../packages/"),
-      reg: /index\.js$/,
-      prettierOptions: {},
-    },
-  ) {
-    this.options = options;
+  constructor({
+    targetFolder = path.join(__dirname, "../packages/"),
+    packageToExport = [],
+    reg = /index\.js$/,
+    prettierOptions = {},
+  } = {}) {
+    packageToExport = this.getPackageToExport(packageToExport);
+    this.options = {
+      targetFolder,
+      packageToExport,
+      reg,
+      prettierOptions,
+    };
     this.tpl = `
 import Component from "./src/index.vue";
 Component.install = function(Vue) {
@@ -36,6 +42,9 @@ if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
 }
 export default {install,${components}};`;
+  }
+  getPackageToExport(packageToExport = []) {
+    return packageToExport.concat(pkg.packageToExport || []);
   }
   parserComponentName(name = "") {
     let output = "";
@@ -82,9 +91,11 @@ export default {install,${components}};`;
         fs.unlinkSync(target);
       }
       fs.writeFileSync(target, this.formatCode(this.tpl));
-      const componentName = this.parserComponentName(name);
-      importCodeString += this.createImportCode(componentName, name);
-      list.push(componentName);
+      if (this.options.packageToExport.includes(name)) {
+        const componentName = this.parserComponentName(name);
+        importCodeString += this.createImportCode(componentName, name);
+        list.push(componentName);
+      }
     }
 
     fs.writeFileSync(
