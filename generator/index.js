@@ -36,6 +36,7 @@ module.exports = async function (api, optons, rootOptions) {
       "fetch:package": "vue-cli-service fetchPackage",
     },
     devDependencies: {
+      "@babel/core": "^7.15.5",
       "cross-env": "^7.0.3",
       "webpack-cli": "^4.8.0",
       "clean-webpack-plugin": "^4.0.0",

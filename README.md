@@ -14,10 +14,10 @@ npx @vue/cli create --preset git@github.com:Mrooze-zeng/vue2-component-repo-pres
 npx @vue/cli create --preset ./vue2-component-repo-preset <project-name>
 ```
 
-或者(加上`direct:`很重要,否则`download-git-repo`可能会报` Error: 'git clone' failed with status 128`)
+或者(加上`direct:`和`--clone`很重要,否则`download-git-repo`可能会报` Error: 'git clone' failed with status 128`)
 
 ```shell
-npx @vue/cli create --preset direct:https://github.com/Mrooze-zeng/vue2-component-repo-preset.git <project-name>
+npx @vue/cli create --preset direct:https://github.com/Mrooze-zeng/vue2-component-repo-preset.git --clone <project-name>
 ```
 
 **错误:**
