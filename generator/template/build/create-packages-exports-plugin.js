@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const prettier = require("prettier");
 const prettierOptions = require("./prettier-default-options.json");
-const pkg = require("../package.json");
+const pkg = require(path.resolve(process.cwd(), "package.json"));
 
 module.exports = class CreatePackagesExportsPlugin {
   constructor({
