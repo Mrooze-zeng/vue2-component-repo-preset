@@ -22,7 +22,7 @@ module.exports = {
     index: "./packages/index.js",
   },
   output: {
-    path: path.resolve(__dirname, "../<%= projectName %>"),
+    path: path.resolve(process.cwd(), "/<%= projectName %>"),
     publicPath: "/<%= projectName %>/",
     library: "<%= projectName %>",
     libraryTarget: "umd",
@@ -95,7 +95,7 @@ module.exports = {
       filename: "index.css",
     }),
     new VueUsePackagesPlugin({
-      target: path.resolve(__dirname, "../src/main.js"),
+      target: path.resolve(process.cwd(), "src/main.js"),
       placeholder: "/* use-package-loader-inject */",
     }),
   ],
