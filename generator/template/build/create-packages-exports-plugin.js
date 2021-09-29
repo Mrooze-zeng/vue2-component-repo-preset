@@ -91,7 +91,10 @@ export default {install,${components}};`;
         fs.unlinkSync(target);
       }
       fs.writeFileSync(target, this.formatCode(this.tpl));
-      if (this.options.packageToExport.includes(name)) {
+      if (
+        this.options.packageToExport.includes(name) ||
+        !this.options.packageToExport.length
+      ) {
         const componentName = this.parserComponentName(name);
         importCodeString += this.createImportCode(componentName, name);
         list.push(componentName);
