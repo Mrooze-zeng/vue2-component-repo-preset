@@ -36,25 +36,21 @@ module.exports = async function (api, optons, rootOptions) {
       "fetch:package": "vue-cli-service fetchPackage",
     },
     devDependencies: {
-      "@babel/core": "^7.15.5",
-      "@babel/types": "^7.15.4",
       "cross-env": "^7.0.3",
-      "loader-utils": "^2.0.0",
-      prettier: "^2.3.2",
-      "schema-utils": "^3.1.1",
       "webpack-cli": "^4.8.0",
       "clean-webpack-plugin": "^4.0.0",
       "babel-loader": "^8.2.2",
-      "@vue/cli": "^4.5.13",
-      ejs: "^3.1.6",
       globby: "^12.0.2",
-      "download-git-repo": "^3.0.2",
       "sass-loader": "^10.0.3",
       "node-sass": "^6.0.1",
       "terser-webpack-plugin": "^4.2.3",
     },
     vuePlugins: {
-      service: ["./vue-service/index"],
+      service: [
+        "node_modules/z-toolkit-v1/vue-services/createPackage",
+        "node_modules/z-toolkit-v1/vue-services/fetchPackage",
+        "node_modules/z-toolkit-v1/vue-services/updateTemplate",
+      ],
     },
   });
   const source = await getTpls(optons);
