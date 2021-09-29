@@ -32,7 +32,7 @@ module.exports = async function (api, optons, rootOptions) {
       lint: "vue-cli-service lint",
       "build:package": "webpack --config build/webpack.config.build.js",
       "create:package": "vue-cli-service createPackage",
-      "update:tpl": "vue-cli-service updateTpl",
+      "reset:tpl": "vue-cli-service updateTpl",
       "fetch:package": "vue-cli-service fetchPackage",
     },
     devDependencies: {
