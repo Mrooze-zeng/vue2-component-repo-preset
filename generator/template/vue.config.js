@@ -9,7 +9,7 @@ module.exports = {
       .rule("main-entry")
       .test(/main\.js$/)
       .use("VueUsePackagesLoader")
-      .loader(path.resolve(__dirname, "./build/vue-use-packages-loader.js"))
+      .loader("z-toolkit-v1/webpack/vue-use-packages-loader")
       .options({
         placeholder: "/* use-package-loader-inject */",
       })
