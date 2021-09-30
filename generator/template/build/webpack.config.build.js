@@ -10,6 +10,7 @@ const DisableEslintCheckPlugin = require("z-toolkit-v1/webpack/disable-eslint-ch
 const CreatePackagesExportsPlugin = require("z-toolkit-v1/webpack/create-packages-exports-plugin");
 const VueUsePackagesPlugin = require("z-toolkit-v1/webpack/vue-use-packages-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const SplitPackagePlugin = require("z-toolkit-v1/webpack/split-package-plugin");
 
 module.exports = {
   mode: "production",
@@ -91,6 +92,7 @@ module.exports = {
     _: "underscore",
   },
   plugins: [
+    new SplitPackagePlugin(),
     new CleanWebpackPlugin(),
     new DisableEslintCheckPlugin(),
     new CreatePackagesExportsPlugin(),
