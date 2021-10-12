@@ -81,6 +81,9 @@ module.exports = {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/,
+        options: {
+          presets: [["@babel/preset-env", { targets: "ie 11" }]],
+        },
       },
       {
         test: /\.vue$/,
