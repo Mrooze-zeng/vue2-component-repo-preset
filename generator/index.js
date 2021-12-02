@@ -45,7 +45,7 @@ module.exports = async function (api, optons, rootOptions) {
       "sass-loader": "^10.0.3",
       "node-sass": "^6.0.1",
       "terser-webpack-plugin": "^4.2.3",
-      "z-toolkit-v1": "^0.1.0",
+      "z-toolkit-v1": "^0.3.2-3",
     },
     vuePlugins: {
       service: [
